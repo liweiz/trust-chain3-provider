@@ -1,12 +1,14 @@
+// Modifications copyright © 2019 Liwei Zhang. All rights reserved.
+
 "use strict";
 
-import Web3 from "web3";
+import Chain3 from "chain3";
 import FilterMgr from "./filter";
 import RPCServer from "./rpc";
 import Utils from "./utils";
 import IdMapping from "./id_mapping";
 
-class TrustWeb3Provider {
+class TrustChain3Provider {
   constructor(config) {
     this.setConfig(config);
 
@@ -51,16 +53,16 @@ class TrustWeb3Provider {
       id: payload.id
     };
     switch(payload.method) {
-      case "eth_accounts":
-        response.result = this.eth_accounts();
+      case "mc_accounts":
+        response.result = this.mc_accounts();
         break;
-      case "eth_coinbase":
-        response.result = this.eth_coinbase();
+      case "mc_coinbase":
+        response.result = this.mc_coinbase();
         break;
       case "net_version":
         response.result = this.net_version();
         break;
-      case "eth_uninstallFilter":
+      case "mc_uninstallFilter":
         this.sendAsync(payload, (error) => {
           if (error) {
             console.log(`<== uninstallFilter ${error}`);
@@ -101,14 +103,14 @@ class TrustWeb3Provider {
       });
 
       switch(payload.method) {
-        case "eth_accounts":
-          return this.sendResponse(payload.id, this.eth_accounts());
-        case "eth_coinbase":
-          return this.sendResponse(payload.id, this.eth_coinbase());
+        case "mc_accounts":
+          return this.sendResponse(payload.id, this.mc_accounts());
+        case "mc_coinbase":
+          return this.sendResponse(payload.id, this.mc_coinbase());
         case "net_version":
           return this.sendResponse(payload.id, this.net_version());
-        case "eth_sign":
-          return this.eth_sign(payload);
+        case "mc_sign":
+          return this.mc_sign(payload);
         case "personal_sign":
           return this.personal_sign(payload);
         case "personal_ecRecover":
@@ -116,22 +118,22 @@ class TrustWeb3Provider {
         case "eth_signTypedData":
         case "eth_signTypedData_v3":
           return this.eth_signTypedData(payload);
-        case "eth_sendTransaction":
-          return this.eth_sendTransaction(payload);
+        case "mc_sendTransaction":
+          return this.mc_sendTransaction(payload);
         case "eth_requestAccounts":
           return this.eth_requestAccounts(payload);
-        case "eth_newFilter":
-          return this.eth_newFilter(payload);
-        case "eth_newBlockFilter":
-          return this.eth_newBlockFilter(payload);
-        case "eth_newPendingTransactionFilter":
-          return this.eth_newPendingTransactionFilter(payload);
-        case "eth_uninstallFilter":
-          return this.eth_uninstallFilter(payload);
-        case "eth_getFilterChanges":
-          return this.eth_getFilterChanges(payload);
-        case "eth_getFilterLogs":
-          return this.eth_getFilterLogs(payload);
+        case "mc_newFilter":
+          return this.mc_newFilter(payload);
+        case "mc_newBlockFilter":
+          return this.mc_newBlockFilter(payload);
+        case "mc_newPendingTransactionFilter":
+          return this.mc_newPendingTransactionFilter(payload);
+        case "mc_uninstallFilter":
+          return this.mc_uninstallFilter(payload);
+        case "mc_getFilterChanges":
+          return this.mc_getFilterChanges(payload);
+        case "mc_getFilterLogs":
+          return this.mc_getFilterLogs(payload);
         default:
           this.callbacks.delete(payload.id);
           return this.rpc.call(payload).then(resolve).catch(reject);
@@ -139,11 +141,11 @@ class TrustWeb3Provider {
     });
   }
 
-  eth_accounts() {
+  mc_accounts() {
     return this.address ? [this.address] : [];
   }
 
-  eth_coinbase() {
+  mc_coinbase() {
     return this.address;
   }
 
@@ -151,7 +153,7 @@ class TrustWeb3Provider {
     return this.chainId.toString(10) || null;
   }
 
-  eth_sign(payload) {
+  mc_sign(payload) {
     this.postMessage("signMessage", payload.id, {data: payload.params[1]});
   }
 
@@ -175,37 +177,37 @@ class TrustWeb3Provider {
     this.postMessage("requestAccounts", payload.id, {});
   }
 
-  eth_newFilter(payload) {
+  mc_newFilter(payload) {
     this.filterMgr.newFilter(payload)
     .then(filterId => this.sendResponse(payload.id, filterId))
     .catch(error => this.sendError(payload.id, error));
   }
 
-  eth_newBlockFilter(payload) {
+  mc_newBlockFilter(payload) {
     this.filterMgr.newBlockFilter()
     .then(filterId => this.sendResponse(payload.id, filterId))
     .catch(error => this.sendError(payload.id, error));
   }
 
-  eth_newPendingTransactionFilter(payload) {
+  mc_newPendingTransactionFilter(payload) {
     this.filterMgr.newPendingTransactionFilter()
     .then(filterId => this.sendResponse(payload.id, filterId))
     .catch(error => this.sendError(payload.id, error));
   }
 
-  eth_uninstallFilter(payload) {
+  mc_uninstallFilter(payload) {
     this.filterMgr.uninstallFilter(payload.params[0])
     .then(filterId => this.sendResponse(payload.id, filterId))
     .catch(error => this.sendError(payload.id, error));
   }
 
-  eth_getFilterChanges(payload) {
+  mc_getFilterChanges(payload) {
     this.filterMgr.getFilterChanges(payload.params[0])
     .then(data => this.sendResponse(payload.id, data))
     .catch(error => this.sendError(payload.id, error));
   }
 
-  eth_getFilterLogs(payload) {
+  mc_getFilterLogs(payload) {
     this.filterMgr.getFilterLogs(payload.params[0])
     .then(data => this.sendResponse(payload.id, data))
     .catch(error => this.sendError(payload.id, error));
@@ -249,5 +251,5 @@ class TrustWeb3Provider {
   }
 }
 
-window.Trust = TrustWeb3Provider;
-window.Web3 = Web3;
+window.Trust = TrustChain3Provider;
+window.Chain3 = Chain3;

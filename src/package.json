@@ -1,7 +1,9 @@
+// Modifications copyright © 2019 Liwei Zhang. All rights reserved.
+
 {
   "name": "trust-web3-provider",
-  "version": "0.3.0",
-  "description": "Trust Web3 Provider",
+  "version": "0.1.0",
+  "description": "Trust Chain3 Provider",
   "main": "index.js",
   "scripts": {
     "build": "rm -rf ../dist && parcel build index.js -o trust-min.js -d ../dist",
@@ -17,7 +19,7 @@
   "author": "Trust <support@trustwalletapp.com>",
   "license": "GPL-3.0",
   "dependencies": {
-    "web3": "^0.20.7"
+    "chain3": "^0.1.13"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
