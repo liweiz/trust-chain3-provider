@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  TrustWeb3Provider
+//  TrustChain3Provider
 //
 //  Created by hewigovens on 02/15/2018.
 //  Copyright (c) 2018 hewigovens. All rights reserved.

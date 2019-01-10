@@ -1,6 +1,6 @@
 //
 //  DAppMethod.swift
-//  TrustWeb3Provider_Example
+//  TrustChain3Provider_Example
 //
 //  Created by Tao Xu on 12/1/18.
 //  Copyright © 2018 CocoaPods. All rights reserved.

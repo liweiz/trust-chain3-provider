@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-               BuildableName = "TrustWeb3Provider_Example.app"
-               BlueprintName = "TrustWeb3Provider_Example"
-               ReferencedContainer = "container:TrustWeb3Provider.xcodeproj">
+               BuildableName = "TrustChain3Provider_Example.app"
+               BlueprintName = "TrustChain3Provider_Example"
+               ReferencedContainer = "container:TrustChain3Provider.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACE41AFB9204008FA782"
-               BuildableName = "TrustWeb3Provider_Tests.xctest"
-               BlueprintName = "TrustWeb3Provider_Tests"
-               ReferencedContainer = "container:TrustWeb3Provider.xcodeproj">
+               BuildableName = "TrustChain3Provider_Tests.xctest"
+               BlueprintName = "TrustChain3Provider_Tests"
+               ReferencedContainer = "container:TrustChain3Provider.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACE41AFB9204008FA782"
-               BuildableName = "TrustWeb3Provider_Tests.xctest"
-               BlueprintName = "TrustWeb3Provider_Tests"
-               ReferencedContainer = "container:TrustWeb3Provider.xcodeproj">
+               BuildableName = "TrustChain3Provider_Tests.xctest"
+               BlueprintName = "TrustChain3Provider_Tests"
+               ReferencedContainer = "container:TrustChain3Provider.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "TrustWeb3Provider_Example.app"
-            BlueprintName = "TrustWeb3Provider_Example"
-            ReferencedContainer = "container:TrustWeb3Provider.xcodeproj">
+            BuildableName = "TrustChain3Provider_Example.app"
+            BlueprintName = "TrustChain3Provider_Example"
+            ReferencedContainer = "container:TrustChain3Provider.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "TrustWeb3Provider_Example.app"
-            BlueprintName = "TrustWeb3Provider_Example"
-            ReferencedContainer = "container:TrustWeb3Provider.xcodeproj">
+            BuildableName = "TrustChain3Provider_Example.app"
+            BlueprintName = "TrustChain3Provider_Example"
+            ReferencedContainer = "container:TrustChain3Provider.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -99,9 +99,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "TrustWeb3Provider_Example.app"
-            BlueprintName = "TrustWeb3Provider_Example"
-            ReferencedContainer = "container:TrustWeb3Provider.xcodeproj">
+            BuildableName = "TrustChain3Provider_Example.app"
+            BlueprintName = "TrustChain3Provider_Example"
+            ReferencedContainer = "container:TrustChain3Provider.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

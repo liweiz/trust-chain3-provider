@@ -1,15 +1,15 @@
 PODS:
-  - TrustWeb3Provider (0.3.3)
+  - TrustChain3Provider (0.3.3)
 
 DEPENDENCIES:
-  - TrustWeb3Provider (from `../`)
+  - TrustChain3Provider (from `../`)
 
 EXTERNAL SOURCES:
-  TrustWeb3Provider:
+  TrustChain3Provider:
     :path: "../"
 
 SPEC CHECKSUMS:
-  TrustWeb3Provider: c2fc6084fa193fb1e68323003648866e388ab723
+  TrustChain3Provider: c2fc6084fa193fb1e68323003648866e388ab723
 
 PODFILE CHECKSUM: 451ed8db8979ff2bdc7212bb45d9b0710eb58015
 

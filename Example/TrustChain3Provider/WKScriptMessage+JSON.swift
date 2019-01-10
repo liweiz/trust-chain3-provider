@@ -1,6 +1,6 @@
 //
 //  WKScriptMessage+JSON.swift
-//  TrustWeb3Provider_Example
+//  TrustChain3Provider_Example
 //
 //  Created by hewigovens on 12/1/18.
 //  Copyright © 2018 hewigovens. All rights reserved.

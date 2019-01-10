@@ -1,6 +1,6 @@
 //
 //  WKUserScriptConfig.swift
-//  TrustWeb3Provider_Example
+//  TrustChain3Provider_Example
 //
 //  Created by hewigovens on 12/1/18.
 //  Copyright © 2018 hewigovens. All rights reserved.
@@ -17,7 +17,7 @@ struct WKUserScriptConfig {
     let privacyMode: Bool
 
     var providerJsBundleUrl: URL {
-        let bundlePath = Bundle.main.path(forResource: "TrustWeb3Provider", ofType: "bundle")
+        let bundlePath = Bundle.main.path(forResource: "TrustChain3Provider", ofType: "bundle")
         let bundle = Bundle(path: bundlePath!)!
         return bundle.url(forResource: "trust-min", withExtension: "js")!
     }
@@ -57,8 +57,8 @@ struct WKUserScriptConfig {
                 };
                 const provider = new window.Trust(config);
                 window.ethereum = provider;
-                window.web3 = new window.Web3(provider);
-                window.web3.eth.defaultAccount = config.address;
+                window.chain3 = new window.Chain3(provider);
+                window.chain3.eth.defaultAccount = config.address;
 
                 window.chrome = {webstore: {}};
             })();
