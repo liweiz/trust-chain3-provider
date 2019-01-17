@@ -9,17 +9,17 @@ class RPCServer {
   }
 
   getBlockNumber() {
-    return this.call({jsonrpc: "2.0", method: "eth_blockNumber", params: []})
+    return this.call({jsonrpc: "2.0", method: "mc_blockNumber", params: []})
     .then(json => json.result);
   }
 
   getBlockByNumber(number) {
-    return this.call({jsonrpc: "2.0", method: "eth_getBlockByNumber", params: [number, false]})
+    return this.call({jsonrpc: "2.0", method: "mc_getBlockByNumber", params: [number, false]})
     .then(json => json.result);
   }
 
   getFilterLogs(filter) {
-    return this.call({jsonrpc: "2.0", method: "eth_getLogs", params: [filter]});
+    return this.call({jsonrpc: "2.0", method: "mc_getLogs", params: [filter]});
   }
 
   call(payload) {
