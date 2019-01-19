@@ -5,7 +5,7 @@ var Trust = window.Trust;
 var Chain3 = require("chain3");
 global.fetch = require("node-fetch");
 
-describe("TrustChain3Provider constructor tests", () => {
+describe("TrustChain3Provider tests", () => {
 
   /*
    Setup
@@ -73,14 +73,14 @@ describe("TrustChain3Provider constructor tests", () => {
     Creating new log filter on local private vnode via "mc_newFilter"
   */
   
-  var logFilterId;
-  providerPrivate.rpc
-    .call({jsonrpc: "2.0", method: "mc_newFilter", params: [{topics:["0x0000000000000000000000000000000000000000000000000000000012341234"]}]})
-    .then(result => {
-      console.log("mc_newFilter result: " + result.result);
-      logFilterId = result.result;
-    })
-    .catch(err => console.log("Error when creating log filter on private vnode: " + err));
+  // var logFilterId;
+  // providerPrivate.rpc
+  //   .call({jsonrpc: "2.0", method: "mc_newFilter", params: [{topics:["0x0000000000000000000000000000000000000000000000000000000012341234"]}]})
+  //   .then(result => {
+  //     console.log("mc_newFilter result: " + result.result);
+  //     logFilterId = result.result;
+  //   })
+  //   .catch(err => console.log("Error when creating log filter on private vnode: " + err));
 
   
 
@@ -90,22 +90,26 @@ describe("TrustChain3Provider constructor tests", () => {
 
   // FilterMgr
 
-  var filtersBefore;
-  var filtersAfter;
-  var blkNumsBefore;
-  var blkNumsAfter;
-  var timersBefore;
-  var timersAfter;
-
   var localLogFilterId;
 
-  test("test FilterMgr.newFilter", async () => {
-    expect.assertions(1);
+  test("test FilterMgr creation of new filters", async () => {
+    expect.assertions(4);
+
+    var localLogFilterId;
+    var localBlkFilterId;
+    var localPendingTxFilterId;
+
+    var filtersBefore;
+    var filtersAfter;
+    var blkNumsBefore;
+    var blkNumsAfter;
+    var timersBefore;
+    var timersAfter;
+
     filtersBefore = providerPrivate.filterMgr.filters.size;
     blkNumsBefore = providerPrivate.filterMgr.blockNumbers.size;
     timersBefore = providerPrivate.filterMgr.timers.size;
-    console.log("FilterMgr.newFilter");
-    console.log(JSON.stringify(providerPrivate.filterMgr.rpc));
+
     await expect(
       providerPrivate.filterMgr
         .newFilter({jsonrpc: "2.0", method: "mc_newFilter", params: [{topics:["0x0000000000000000000000000000000000000000000000000000000012341234"]}]})
@@ -120,25 +124,20 @@ describe("TrustChain3Provider constructor tests", () => {
     )
     .resolves
     .toBeDefined();
-  });
 
-  test("test FilterMgr.newFilter all maps increased by 1", () => {
-    expect.assertions(3);
-    expect(filtersAfter).toEqual(filtersBefore + 1);
-    expect(blkNumsAfter).toEqual(blkNumsBefore + 1);
-    expect(timersAfter).toEqual(timersBefore + 1);
-  });
+    console.log("After FilterMgr.newFilter test, all maps increased by 1");
 
-  var localBlkFilterId;
+    // expect(filtersAfter).toEqual(filtersBefore + 1);
+    // expect(blkNumsAfter).toEqual(blkNumsBefore + 1);
+    // expect(timersAfter).toEqual(timersBefore + 1);
 
-  test("test FilterMgr.newBlockFilter", async () => {
-    expect.assertions(1);
     filtersBefore = providerPrivate.filterMgr.filters.size;
     blkNumsBefore = providerPrivate.filterMgr.blockNumbers.size;
     timersBefore = providerPrivate.filterMgr.timers.size;
+
     await expect(
       providerPrivate.filterMgr
-        .newBlockFilter({fromBlock: "pending"})
+        .newBlockFilter()
         .then(result => {
           console.log("FilterMgr.newBlockFilter result: " + result);
           filtersAfter = providerPrivate.filterMgr.filters.size;
@@ -150,25 +149,20 @@ describe("TrustChain3Provider constructor tests", () => {
     )
     .resolves
     .toBeDefined();
-  });
 
-  // test("test FilterMgr.newBlockFilter all maps increased by 1", () => {
-  //   expect.assertions(3);
-  //   expect(filtersAfter).toEqual(filtersBefore + 1);
-  //   expect(blkNumsAfter).toEqual(blkNumsBefore + 1);
-  //   expect(timersAfter).toEqual(timersBefore + 1);
-  // });
+    console.log("After FilterMgr.newBlockFilter test, all maps increased by 1");
 
-  var localPendingTxFilterId;
+    // expect(filtersAfter).toEqual(filtersBefore + 1);
+    // expect(blkNumsAfter).toEqual(blkNumsBefore + 1);
+    // expect(timersAfter).toEqual(timersBefore + 1);
 
-  test("test FilterMgr.newPendingTransactionFilter", async () => {
-    expect.assertions(1);
     filtersBefore = providerPrivate.filterMgr.filters.size;
     blkNumsBefore = providerPrivate.filterMgr.blockNumbers.size;
     timersBefore = providerPrivate.filterMgr.timers.size;
+
     await expect(
       providerPrivate.filterMgr
-        .newPendingTransactionFilter({fromBlock: "earliest"})
+        .newPendingTransactionFilter()
         .then(result => {
           console.log("FilterMgr.newPendingTransactionFilter result: " + result);
           filtersAfter = providerPrivate.filterMgr.filters.size;
@@ -180,38 +174,37 @@ describe("TrustChain3Provider constructor tests", () => {
     )
     .resolves
     .toBeDefined();
+
+    // expect(filtersAfter).toEqual(filtersBefore + 1);
+    // expect(blkNumsAfter).toEqual(blkNumsBefore + 1);
+    // expect(timersAfter).toEqual(timersBefore + 1);
+
+    filtersBefore = providerPrivate.filterMgr.filters.size;
+    blkNumsBefore = providerPrivate.filterMgr.blockNumbers.size;
+    timersBefore = providerPrivate.filterMgr.timers.size;
+
+    console.log("localLogFilterId: " + localLogFilterId);
+    console.log("localBlkFilterId: " + localBlkFilterId);
+    console.log("localPendingTxFilterId: " + localPendingTxFilterId);
+
+    await expect(
+      providerPrivate.filterMgr
+        .uninstallFilter("0x1")
+        .then(result => {
+          console.log("FilterMgr.uninstallFilter result: " + result);
+          filtersAfter = providerPrivate.filterMgr.filters.size;
+          blkNumsAfter = providerPrivate.filterMgr.blockNumbers.size;
+          timersAfter = providerPrivate.filterMgr.timers.size;
+          return result;
+        })
+    )
+    .resolves
+    .toBeTruthy();
+
+    // expect(filtersAfter).toEqual(filtersBefore - 1);
+    // expect(blkNumsAfter).toEqual(blkNumsBefore - 1);
+    // expect(timersAfter).toEqual(timersBefore - 1);
   });
-
-  // test("test FilterMgr.newPendingTransactionFilter all maps increased by 1", () => {
-  //   expect.assertions(3);
-  //   expect(filtersAfter).toEqual(filtersBefore + 1);
-  //   expect(blkNumsAfter).toEqual(blkNumsBefore + 1);
-  //   expect(timersAfter).toEqual(timersBefore + 1);
-  // });
-
-  // test("test FilterMgr.uninstallFilter", async () => {
-  //   expect.assertions(1);
-  //   const filtersBefore = providerGateway.filterMgr.filters.size;
-  //   const blkNumsBefore = providerGateway.filterMgr.blockNumbers.size;
-  //   const timersBefore = providerGateway.filterMgr.timers.size;
-  //   await expect(
-  //     providerGateway.filterMgr
-  //       .uninstallFilter(localPendingTxFilterId)
-  //       .then(result => {
-  //         expect.assertions(3);
-  //         console.log("FilterMgr.uninstallFilter result: " + result);
-  //         const filtersAfter = providerGateway.filterMgr.filters.size;
-  //         const blkNumsAfter = providerGateway.filterMgr.blockNumbers.size;
-  //         const timersAfter = providerGateway.filterMgr.timers.size;
-  //         expect(filtersAfter).toEqual(filtersBefore - 1);
-  //         expect(blkNumsBefore).toEqual(blkNumsBefore - 1);
-  //         expect(timersAfter).toEqual(timersBefore - 1);
-  //         return result.result;
-  //       })
-  //   )
-  //   .resolves
-  //   .toBeTruthy();
-  // });
 
   // // Add one localPendingTxFilterId back for later test
   // providerGateway.filterMgr

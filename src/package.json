@@ -7,7 +7,7 @@
     "build": "rm -rf ../dist && parcel build index.js -o trust-min.js -d ../dist",
     "watch": "rm -rf ../dist && parcel watch index.js -o trust-min.js -d ../dist",
     "lint": "eslint . --fix",
-    "test": "jest"
+    "test": "jest -i"
   },
   "repository": {
     "type": "git",
