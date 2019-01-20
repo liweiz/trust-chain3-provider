@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/liweiz/trust-chain3-provider'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Liwei Zhang' => 'liweiz' }
-  s.source           = { :git => 'https://github.com/liweiz/trust-chain3-provider.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/liweiz/trust-chain3-provider.git' }
 
   s.ios.deployment_target = '8.0'
 

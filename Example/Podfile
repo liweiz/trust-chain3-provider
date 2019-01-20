@@ -2,6 +2,7 @@ use_frameworks!
 
 target 'TrustChain3Provider_Example' do
   pod 'TrustChain3Provider', :path => '../'
+  pod 'chain3swift', :git => 'https://github.com/moacchain/chain3swift.git'
 
   target 'TrustChain3Provider_Tests' do
     inherit! :search_paths
