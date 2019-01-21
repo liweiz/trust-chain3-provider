@@ -1,6 +1,8 @@
 import UIKit
 import XCTest
 
+@testable import Pods_TrustChain3Provider_Tests
+
 class Tests: XCTestCase {
     
     override func setUp() {

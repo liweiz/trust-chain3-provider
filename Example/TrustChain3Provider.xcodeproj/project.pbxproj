@@ -32,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		37C9F65921D39DB5B07AD75C /* Pods-TrustChain3Provider_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustChain3Provider_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrustChain3Provider_Example/Pods-TrustChain3Provider_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* TrustChain3Provider_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrustChain3Provider_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +43,8 @@
 		607FACE51AFB9204008FA782 /* TrustChain3Provider_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrustChain3Provider_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		726C40BF7BBB9DBC014C80C5 /* Pods-TrustChain3Provider_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustChain3Provider_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrustChain3Provider_Example/Pods-TrustChain3Provider_Example.release.xcconfig"; sourceTree = "<group>"; };
+		8AA9614C3A24EC2E2887D244 /* Pods-TrustChain3Provider_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustChain3Provider_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrustChain3Provider_Tests/Pods-TrustChain3Provider_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		960FF95B0B6171E298739B73 /* Pods_TrustChain3Provider_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrustChain3Provider_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DAA0C45AA8BFEFF95137B87 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		BB544C0221B2124500E8C525 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -50,6 +53,7 @@
 		BB544C0821B2402900E8C525 /* WKScriptMessage+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKScriptMessage+JSON.swift"; sourceTree = "<group>"; };
 		BB544C0A21B24E0400E8C525 /* WKUserScriptConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKUserScriptConfig.swift; sourceTree = "<group>"; };
 		C21C2822FF502C70248CBED9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		C936CC791F60238CC6AD2B8E /* Pods-TrustChain3Provider_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustChain3Provider_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrustChain3Provider_Tests/Pods-TrustChain3Provider_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		D91A7C4513C7274B3809282D /* Pods_TrustChain3Provider_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrustChain3Provider_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F08F82901B708D284118EFFB /* TrustChain3Provider.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TrustChain3Provider.podspec; path = ../TrustChain3Provider.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
@@ -161,6 +165,10 @@
 		8B5580A260F8CFEF1414545F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				37C9F65921D39DB5B07AD75C /* Pods-TrustChain3Provider_Example.debug.xcconfig */,
+				726C40BF7BBB9DBC014C80C5 /* Pods-TrustChain3Provider_Example.release.xcconfig */,
+				8AA9614C3A24EC2E2887D244 /* Pods-TrustChain3Provider_Tests.debug.xcconfig */,
+				C936CC791F60238CC6AD2B8E /* Pods-TrustChain3Provider_Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -177,6 +185,7 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				9B817E892CA041381AC440F9 /* [CP] Copy Pods Resources */,
+				B52D66F0CF194A79037FC191 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -302,6 +311,38 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrustChain3Provider_Example/Pods-TrustChain3Provider_Example-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B52D66F0CF194A79037FC191 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TrustChain3Provider_Example/Pods-TrustChain3Provider_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
+				"${BUILT_PRODUCTS_DIR}/chain3swift/chain3swift.framework",
+				"${BUILT_PRODUCTS_DIR}/secp256k1.swift/secp256k1.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/chain3swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrustChain3Provider_Example/Pods-TrustChain3Provider_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DA5CA147B5E6FFAF7D4DA3D2 /* [CP] Check Pods Manifest.lock */ = {
@@ -480,6 +521,7 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37C9F65921D39DB5B07AD75C /* Pods-TrustChain3Provider_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TrustChain3Provider/Info.plist;
@@ -494,6 +536,7 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 726C40BF7BBB9DBC014C80C5 /* Pods-TrustChain3Provider_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TrustChain3Provider/Info.plist;
@@ -508,6 +551,7 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8AA9614C3A24EC2E2887D244 /* Pods-TrustChain3Provider_Tests.debug.xcconfig */;
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -523,6 +567,7 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C936CC791F60238CC6AD2B8E /* Pods-TrustChain3Provider_Tests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = Tests/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";

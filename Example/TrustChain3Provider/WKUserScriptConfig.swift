@@ -42,7 +42,7 @@ struct WKUserScriptConfig {
                     rpcUrl: "\(rpcUrl)"
                 };
                 const provider = new window.Trust(config);
-                window.ethereum = provider;
+                window.moac = provider;
 
                 window.chrome = {webstore: {}};
             })();
@@ -56,9 +56,9 @@ struct WKUserScriptConfig {
                     rpcUrl: "\(rpcUrl)"
                 };
                 const provider = new window.Trust(config);
-                window.ethereum = provider;
+                window.moac = provider;
                 window.chain3 = new window.Chain3(provider);
-                window.chain3.eth.defaultAccount = config.address;
+                window.chain3.mc.defaultAccount = config.address;
 
                 window.chrome = {webstore: {}};
             })();

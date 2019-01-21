@@ -8,6 +8,8 @@
 
 import UIKit
 import WebKit
+import chain3swift
+import BigInt
 
 class DAppWebViewController: UIViewController {
 
@@ -97,9 +99,7 @@ extension DAppWebViewController: WKScriptMessageHandler {
         print(json)
         guard let name = json["name"] as? String,
             let method = DAppMethod(rawValue: name),
-            let id = json["id"] as? Int64 else {
-            return
-        }
+            let id = json["id"] as? Int64 else { return }
         switch method {
         case .requestAccounts:
             let alert = UIAlertController(
@@ -116,6 +116,45 @@ extension DAppWebViewController: WKScriptMessageHandler {
                 webview?.evaluateJavaScript("window.ethereum.sendResponse(\(id), [\"\(address)\"])", completionHandler: nil)
             }))
             present(alert, animated: true, completion: nil)
+        case .sendTransaction:
+            guard let inputMap = json["object"] as? [String : Any] else {
+                print("ERROR: message.body not converted to dict")
+                return
+            }
+            guard let sendingAddrString = inputMap["from"] as? String else {
+                print("ERROR: 'from' not converted to String")
+                return
+            }
+            guard let receivingAddrString = inputMap["to"] as? String else {
+                print("ERROR: 'to' not converted to String")
+                return
+            }
+//            guard let data = inputMap["data"] as? String else {
+//                print("ERROR: 'data' not converted to String")
+//            }
+            guard let amount = inputMap["amount"] as? Int64 else {
+                print("ERROR: 'amount' not converted to String")
+                return
+            }
+            let url = URL(string: "http://127.0.0.1:8545")!  // private vnode rpc url to connect
+            if let p = Chain3HttpProvider(url, network: NetworkId(rawValue: BigUInt(id)), keystoreManager: nil) {
+                let chain3 = Chain3(provider: p)
+                let fromAddr = Address(sendingAddrString)
+                let passwordString = "1111"
+                _ = try? chain3.personal.unlockAccount(account: fromAddr, password: passwordString)
+                let gasPrice = try? chain3.mc.getGasPrice()
+                let sendToAddress = Address(receivingAddrString)
+                let intermediate = try? chain3.mc.sendMC(to: sendToAddress, amount: BigUInt(amount))
+                var options = Chain3Options.default
+                options.from = fromAddr
+                options.gasPrice = gasPrice
+                let result = try! intermediate?.sendPromise(options: options).wait()
+                print("result:")
+                print(result!)
+            } else {
+                // Handle error
+            }
+            
         default:
             break
         }
