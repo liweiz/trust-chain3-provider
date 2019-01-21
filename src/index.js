@@ -169,6 +169,10 @@ class TrustChain3Provider {
     this.postMessage("signTypedMessage", payload.id, {data: payload.params[1]});
   }
 
+  // Please reference github.com/TrustWallet/trust-web3-provider/issues/56 @ commit: 702ac4367691b2f4ad2e9b98fe2eef7da17356c9
+  // Original was "signTransaction" and it is not a typo
+  // Keep "sendTransaction" here to avoid unnecessary misunderstanding
+  // Will use other function for "signTransaction" when needed
   eth_sendTransaction(payload) {
     this.postMessage("sendTransaction", payload.id, payload.params[0]);
   }
