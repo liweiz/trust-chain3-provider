@@ -16,18 +16,18 @@ class DAppWebViewController: UIViewController {
     @IBOutlet weak var urlField: UITextField!
 
     var homepage: String {
-        return "https://js-eth-sign.surge.sh"
+        return "https://www.google.com"
     }
 
-    var infuraApiKey: String? {
-        return ProcessInfo.processInfo.environment["INFURA_API_KEY"]
-    }
+//    var infuraApiKey: String? {
+//        return ProcessInfo.processInfo.environment["INFURA_API_KEY"]
+//    }
 
     lazy var scriptConfig: WKUserScriptConfig = {
         return WKUserScriptConfig(
-            address: "0x5Ee066cc1250E367423eD4Bad3b073241612811f",
-            chainId: 1,
-            rpcUrl: "https://mainnet.infura.io/v3/\(infuraApiKey!)",
+            address: "0xe278416fce82f2992ba7147f01d9400163738da4",
+            chainId: 237,
+            rpcUrl: "http://127.0.0.1:8545",
             privacyMode: false
         )
     }()
@@ -36,8 +36,10 @@ class DAppWebViewController: UIViewController {
         let config = WKWebViewConfiguration()
         let controller = WKUserContentController()
         controller.addUserScript(scriptConfig.providerScript)
-        controller.addUserScript(scriptConfig.injectedScript)
+//        controller.addUserScript(scriptConfig.injectedScript)
         for name in DAppMethod.allCases {
+            print("case name:")
+            print(name)
             controller.add(self, name: name.rawValue)
         }
         config.userContentController = controller
@@ -48,22 +50,21 @@ class DAppWebViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        guard checkApiKey() else { return }
+//        guard checkApiKey() else { return }
 
         setupSubviews()
-        urlField.text = homepage
         navigate(to: homepage)
     }
 
-    func checkApiKey() -> Bool {
-        guard infuraApiKey != nil else {
-            let alert = UIAlertController(title: "No infura api key found", message: "Please set INFURA_API_KEY", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-            return false
-        }
-        return true
-    }
+//    func checkApiKey() -> Bool {
+//        guard infuraApiKey != nil else {
+//            let alert = UIAlertController(title: "No infura api key found", message: "Please set INFURA_API_KEY", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//            present(alert, animated: true, completion: nil)
+//            return false
+//        }
+//        return true
+//    }
 
     func setupSubviews() {
         urlField.keyboardType = .URL
@@ -83,11 +84,225 @@ class DAppWebViewController: UIViewController {
         guard let url = URL(string: url) else { return }
         webview.load(URLRequest(url: url))
     }
+    
 }
 
 extension DAppWebViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         navigate(to: textField.text ?? "")
+        
+//        var providerJsBundleUrl: URL {
+//            let bundlePath = Bundle.main.path(forResource: "TrustChain3Provider", ofType: "bundle")
+//            let bundle = Bundle(path: bundlePath!)!
+//            return bundle.url(forResource: "trust-min", withExtension: "js")!
+//        }
+//
+//        var providerJsUrl: URL {
+//            return Bundle.main.url(forResource: "trust-min", withExtension: "js", subdirectory: "dist")!
+//        }
+//        let source = try! String(contentsOf: providerJsUrl)
+//        print("Trust min js:")
+//        print(source)
+//        webview.evaluateJavaScript(source, completionHandler: {(input: Any?, err: Error?) in
+//            print("Trust min js evaluated")
+//                guard let i = input else {
+//                    guard let e = err else {
+//                        print("neither input nor err is available")
+//                        return
+//                    }
+//                    print("err:")
+//                    print(e)
+//                    return
+//                }
+//                print("input")
+//                print(i)
+//        })
+//        webview.evaluateJavaScript("""
+//            (function() {
+//            var config = {
+//            address: "0xe278416fce82f2992ba7147f01d9400163738da4".toLowerCase(),
+//            chainId: 237,
+//            rpcUrl: "http://217.0.0.1:8545"
+//            };
+//            const provider = new window.Trust(config);
+//            window.moac = provider;
+//            window.chain3 = new window.Chain3(provider);
+//            window.chain3.mc.defaultAccount = config.address;
+//
+//            window.chrome = {webstore: {}};
+//            })();
+//            """, completionHandler: {(input: Any?, err: Error?) in
+//                print("moac and chain3 evaluated")
+//            guard let i = input else {
+//                guard let e = err else {
+//                    print("neither input nor err is available")
+//                    return
+//                }
+//                print("err:")
+//                print(e)
+//                return
+//            }
+//            print("input")
+//            print(i)
+//        })
+        
+        webview.evaluateJavaScript("(function (){return window.devicePixelRatio;})()", completionHandler: {(input: Any?, err: Error?) in
+            print("window evaluated")
+            guard let i = input else {
+                guard let e = err else {
+                    print("neither input nor err is available")
+                    return
+                }
+                print("err:")
+                print(e)
+                return
+            }
+            print("input:")
+            print(i)
+        })
+        
+//        var providerJsBundleUrl: URL {
+//            let bundlePath = Bundle.main.path(forResource: "TrustChain3Provider", ofType: "bundle")
+//            let bundle = Bundle(path: bundlePath!)!
+//            return bundle.url(forResource: "trust-min", withExtension: "js")!
+//        }
+//
+//        var providerJsUrl: URL {
+//            return Bundle.main.url(forResource: "trust-min", withExtension: "js", subdirectory: "dist")!
+//        }
+//        guard let source = try? String(contentsOf: providerJsUrl) else {
+//            print("Error: source can not be converted to String.")
+//            return false
+//        }
+        
+//        webview.evaluateJavaScript(source, completionHandler: {(input: Any?, err: Error?) in
+//            print("source evaluated")
+//            guard let i = input else {
+//                guard let e = err else {
+//                    print("neither input nor err is available")
+//                    return
+//                }
+//                print("err:")
+//                print(e)
+//                return
+//            }
+//            print("input")
+//            print(i)
+//        })
+        
+//        let address = "0xe278416fce82f2992ba7147f01d9400163738da4"
+//        let chainId = 237
+//        let rpcUrl = "http://127.0.0.1:8545"
+        
+        let setup = """
+
+        (function() {
+        var config = {
+        address: "0xe278416fce82f2992ba7147f01d9400163738da4".toLowerCase(),
+        chainId: 237,
+        rpcUrl: "http://127.0.0.1:8545"
+        };
+        const provider = new window.Trust(config);
+        window.moac = provider;
+        window.chain3 = new window.Chain3(provider);
+        window.chain3.mc.defaultAccount = config.address;
+
+        window.chrome = {webstore: {}};
+        return window.moac;
+        })();
+        """
+        
+//        source.append(contentsOf: setup)
+        
+        webview.evaluateJavaScript(setup, completionHandler: {(input: Any?, err: Error?) in
+            print("setup evaluated")
+            guard let i = input else {
+                guard let e = err else {
+                    print("neither input nor err is available")
+                    return
+                }
+                print("err:")
+                print(e)
+                return
+            }
+            print("input:")
+            print(i)
+        })
+        
+        
+//        source.append(contentsOf: sendMC)
+        
+//        print(source)
+
+        
+        
+        webview.evaluateJavaScript("(function(){return JSON.stringify(window.moac);})();", completionHandler: {(input: Any?, err: Error?) in
+            print("window.moac evaluated")
+            guard let i = input else {
+                guard let e = err else {
+                    print("neither input nor err is available")
+                    return
+                }
+                print("err:")
+                print(e)
+                return
+            }
+            print("input:")
+            print(i)
+        })
+        
+//        webview.configuration.userContentController.addUserScript(WKUserScriptConfig(
+//            address: "0xe278416fce82f2992ba7147f01d9400163738da4",
+//            chainId: 237,
+//            rpcUrl: "127.0.0.1:8545",
+//            privacyMode: false
+//            ).injectedScript)
+        
+        let webkitMessageHandlers = """
+            (function(){return JSON.stringify(window.webkit.messageHandlers);}());
+        """
+
+        webview.evaluateJavaScript(webkitMessageHandlers, completionHandler: {(input: Any?, err: Error?) in
+            print("webkitMessageHandlers evaluated")
+            guard let i = input else {
+                guard let e = err else {
+                    print("neither input nor err is available")
+                    return
+                }
+                print("err:")
+                print(e)
+                return
+            }
+            print("input:")
+            print(i)
+        })
+        
+        let sendMC = """
+            window.moac.postMessage("sendTransaction",
+                237,
+                {
+                    from: "0xe278416fce82f2992ba7147f01d9400163738da4",
+                    to: "0x668969b62624f99d64c2c8ceddfdf6b7418519e0",
+                    amount: 22
+                }
+            );
+        """
+        
+        webview.evaluateJavaScript(sendMC, completionHandler: {(input: Any?, err: Error?) in
+            print("sendMC evaluated")
+            guard let i = input else {
+                guard let e = err else {
+                    print("neither input nor err is available")
+                    return
+                }
+                print("err:")
+                print(e)
+                return
+            }
+            print("input:")
+            print(i)
+        })
+        
         textField.resignFirstResponder()
         return true
     }

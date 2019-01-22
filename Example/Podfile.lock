@@ -1,16 +1,57 @@
 PODS:
-  - TrustChain3Provider (0.3.3)
+  - BigInt (3.1.0):
+    - SipHash (~> 1.2)
+  - chain3swift (0.1.0):
+    - BigInt (~> 3.1)
+    - CryptoSwift (~> 0.12)
+    - PromiseKit (~> 6.4)
+    - secp256k1.swift (~> 0.1.4)
+  - CryptoSwift (0.13.1)
+  - PromiseKit (6.7.1):
+    - PromiseKit/CorePromise (= 6.7.1)
+    - PromiseKit/Foundation (= 6.7.1)
+    - PromiseKit/UIKit (= 6.7.1)
+  - PromiseKit/CorePromise (6.7.1)
+  - PromiseKit/Foundation (6.7.1):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.7.1):
+    - PromiseKit/CorePromise
+  - secp256k1.swift (0.1.4)
+  - SipHash (1.2.2)
+  - TrustChain3Provider (0.1.0)
 
 DEPENDENCIES:
+  - chain3swift (from `https://github.com/moacchain/chain3swift.git`)
   - TrustChain3Provider (from `../`)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - BigInt
+    - CryptoSwift
+    - PromiseKit
+    - secp256k1.swift
+    - SipHash
+
 EXTERNAL SOURCES:
+  chain3swift:
+    :git: https://github.com/moacchain/chain3swift.git
   TrustChain3Provider:
     :path: "../"
 
-SPEC CHECKSUMS:
-  TrustChain3Provider: c2fc6084fa193fb1e68323003648866e388ab723
+CHECKOUT OPTIONS:
+  chain3swift:
+    :commit: 08e9c2acbf5d9da9fed7d611e747d1ca5b40e0e3
+    :git: https://github.com/moacchain/chain3swift.git
 
-PODFILE CHECKSUM: 451ed8db8979ff2bdc7212bb45d9b0710eb58015
+SPEC CHECKSUMS:
+  BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
+  chain3swift: cd2ddd1876df4bcaad5cf0cfcb459dcda75cdbc2
+  CryptoSwift: ff68c35a53e03177d31aaa2c1e8b3e010aeed6cb
+  PromiseKit: ef376fb8b4e92edfeb66bd403b983eaa07fbde0c
+  secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
+  SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
+  TrustChain3Provider: e2877761aeb15486394295a3954fa5231bb24666
+
+PODFILE CHECKSUM: 51d198c7f6e0246123d5a5961b2bcac17bbe6df7
 
 COCOAPODS: 1.5.3
