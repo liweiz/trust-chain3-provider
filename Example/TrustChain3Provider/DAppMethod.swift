@@ -14,5 +14,6 @@ enum DAppMethod: String, CaseIterable {
     case signPersonalMessage
     case signMessage
     case sendTransaction
+    case sendSignedTransaction
     case requestAccounts
 }

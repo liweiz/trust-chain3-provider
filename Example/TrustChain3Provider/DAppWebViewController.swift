@@ -277,19 +277,45 @@ extension DAppWebViewController: UITextFieldDelegate {
             print(i)
         })
         
-        let sendMC = """
-            window.moac.postMessage("sendTransaction",
+//        let sendUnsignedMC = """
+//            window.moac.postMessage("sendTransaction",
+//                237,
+//                {
+//                    from: "0xe278416fce82f2992ba7147f01d9400163738da4",
+//                    to: "0x668969b62624f99d64c2c8ceddfdf6b7418519e0",
+//                    amount: 22
+//                }
+//            );
+//        """
+//
+//        webview.evaluateJavaScript(sendUnsignedMC, completionHandler: {(input: Any?, err: Error?) in
+//            print("sendUnsignedMC evaluated")
+//            guard let i = input else {
+//                guard let e = err else {
+//                    print("neither input nor err is available")
+//                    return
+//                }
+//                print("err:")
+//                print(e)
+//                return
+//            }
+//            print("input:")
+//            print(i)
+//        })
+        
+        let sendSignedMC = """
+            window.moac.postMessage("sendSignedTransaction",
                 237,
                 {
                     from: "0xe278416fce82f2992ba7147f01d9400163738da4",
                     to: "0x668969b62624f99d64c2c8ceddfdf6b7418519e0",
-                    amount: 22
+                    amount: 3
                 }
             );
         """
         
-        webview.evaluateJavaScript(sendMC, completionHandler: {(input: Any?, err: Error?) in
-            print("sendMC evaluated")
+        webview.evaluateJavaScript(sendSignedMC, completionHandler: {(input: Any?, err: Error?) in
+            print("sendSignedMC evaluated")
             guard let i = input else {
                 guard let e = err else {
                     print("neither input nor err is available")
@@ -331,6 +357,48 @@ extension DAppWebViewController: WKScriptMessageHandler {
                 webview?.evaluateJavaScript("window.ethereum.sendResponse(\(id), [\"\(address)\"])", completionHandler: nil)
             }))
             present(alert, animated: true, completion: nil)
+        case .sendSignedTransaction:
+            guard let inputMap = json["object"] as? [String : Any] else {
+                print("ERROR: message.body not converted to dict")
+                return
+            }
+            guard let sendingAddrString = inputMap["from"] as? String else {
+                print("ERROR: 'from' not converted to String")
+                return
+            }
+            guard let receivingAddrString = inputMap["to"] as? String else {
+                print("ERROR: 'to' not converted to String")
+                return
+            }
+            //            guard let data = inputMap["data"] as? String else {
+            //                print("ERROR: 'data' not converted to String")
+            //            }
+            guard let amount = inputMap["amount"] as? Int64 else {
+                print("ERROR: 'amount' not converted to String")
+                return
+            }
+            let url = URL(string: "http://127.0.0.1:8545")!  // private vnode rpc url to connect
+            guard let p = Chain3HttpProvider(url, network: NetworkId(rawValue: BigUInt(id)), keystoreManager: nil) else {
+                return
+            }
+            let keystoreJSONStr =
+                """
+                {"address":"e278416fce82f2992ba7147f01d9400163738da4","crypto":{"cipher":"aes-128-ctr","ciphertext":"02f83ac94501fb20c60252f53edbe64c7ee886074ee9515e7f9d16831cd85e31","cipherparams":{"iv":"29bed897160833ce063a748e25cf6c46"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"60030674684834f6f9d956f52a091794b492bfdde51319958b6429f9fce2da88"},"mac":"e06960e1ee3b1e9648f66b92745e000da08b62c50d3755e8f80bb5e69ae6faeb"},"id":"dc70664b-94f8-4793-a9d4-003ca366f6b0","version":3}
+                """
+            let json = keystoreJSONStr
+            guard let keystoreV3 = MOACKeystoreV3(json) else { return }
+            let chain3 = Chain3(provider: p)
+            let keystoreManager = KeystoreManager([keystoreV3])
+            chain3.addKeystoreManager(keystoreManager)
+            guard let gasPrice = try? chain3.mc.getGasPrice() else { return }
+            let fromAddr = Address(sendingAddrString)
+            let sendToAddress = Address(receivingAddrString)
+            guard let intermediate = try? chain3.mc.sendMC(to: sendToAddress, amount: BigUInt(amount)) else { return }
+            var options = Chain3Options.default
+            options.from = fromAddr
+            options.gasPrice = gasPrice
+            guard let result = try? intermediate.sendPromise(password: "1111", options: options).wait() else { return }
+            print(result)
         case .sendTransaction:
             guard let inputMap = json["object"] as? [String : Any] else {
                 print("ERROR: message.body not converted to dict")
